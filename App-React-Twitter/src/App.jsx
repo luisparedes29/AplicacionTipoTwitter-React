@@ -1,12 +1,18 @@
-import { useState } from 'react'
-
+import Header from "./components/Header";
+import Tweets from "./components/Tweets";
+import CrearTweet from "./components/CrearTweet";
+import Footer from "./components/Footer";
 
 function App() {
-  const [count, setCount] = useState(0)
+
 
   return (
-    <>
-    </>
+    <div className="bg-azulGris min-h-screen">
+        <Header/>
+        <Tweets/>
+        <CrearTweet/>
+        <Footer/>
+    </div>
   )
 }
 

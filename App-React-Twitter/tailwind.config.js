@@ -6,7 +6,17 @@ export default {
         './node_modules/react-tailwindcss-select/dist/index.esm.js',
     ],
     theme: {
-        extend: {},
+        extend: {
+            colors: {
+                azulOscuro1: "#00001A",
+                azulOscuro2: "#010326",
+                azulGris: "#21213B",
+              },
+              fontFamily: {
+                Quicksand: ["Quicksand", "sans-serif"],
+                Kanit: ["Kanit", "sans-serif"],
+                }
+        },
     },
     plugins: [],
 };
