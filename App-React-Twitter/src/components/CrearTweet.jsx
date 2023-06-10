@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { FaFeatherAlt, FaWindowClose } from "react-icons/fa";
+import { v4 as uuidv4 } from "uuid";
 
 function CrearTweet() {
   const [isOpen, setIsOpen] = useState(false);
@@ -21,7 +22,7 @@ function CrearTweet() {
   const fechaCreacion = `${now.getDate().toString().padStart(2, '0')}-${(now.getMonth() + 1).toString().padStart(2, '0')}-${now.getFullYear()}`;
   const horaCreacion = `${now.getHours().toString().padStart(2, '0')}:${now.getMinutes().toString().padStart(2, '0')}`;
 
-  let nuevaData={usuario,tweet, fechaCreacion, horaCreacion}
+  let nuevaData={id:uuidv4(),usuario,tweet, fechaCreacion, horaCreacion}
 
     //Obtenemos los datos existentes del localstorage
     const dataExistente= localStorage.getItem('tweets')
