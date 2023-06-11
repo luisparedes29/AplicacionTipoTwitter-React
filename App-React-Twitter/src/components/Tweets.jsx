@@ -1,5 +1,7 @@
 import CardTweet from "./CardTweet"
-import { useState, useEffect } from "react";
+import React,{ useState, useEffect } from "react";
+import CrearTweet from "./CrearTweet";
+
 
 function Tweets(){
     const [tweets, setTweets] = useState(null)
@@ -25,6 +27,7 @@ function Tweets(){
                     ))}
                 </section>
             </section>
+            <CrearTweet actualizarTweets={getTweets}/>
         </div>
     )
 }

@@ -10,7 +10,6 @@ function App() {
     <div className="bg-azulGris min-h-screen">
         <Header/>
         <Tweets/>
-        <CrearTweet/>
         <Footer/>
     </div>
   )
