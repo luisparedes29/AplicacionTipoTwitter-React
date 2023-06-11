@@ -30,6 +30,7 @@ function CrearTweet(props) {
             id: uuidv4(),
             usuario,
             tweet,
+            favorito: false,
             fechaCreacion,
             horaCreacion,
         };
