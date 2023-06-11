@@ -11,6 +11,7 @@ export default {
                 azulOscuro1: "#00001A",
                 azulOscuro2: "#010326",
                 azulGris: "#21213B",
+                gris: "#6D6C8C"
               },
               fontFamily: {
                 Quicksand: ["Quicksand", "sans-serif"],

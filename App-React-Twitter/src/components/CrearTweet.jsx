@@ -30,6 +30,7 @@ function CrearTweet(props) {
             id: uuidv4(),
             usuario,
             tweet,
+            favorito: false,
             fechaCreacion,
             horaCreacion,
         };
@@ -53,7 +54,7 @@ function CrearTweet(props) {
     };
     return (
         <div>
-            <div className="bg-azulOscuro1 text-white  p-4 rounded-[80%] w-[16%] cursor-pointer fixed bottom-5 right-5">
+            <div className="bg-white text-azulOscuro1  p-4 rounded-[80%] w-[16%] cursor-pointer fixed bottom-5 right-5 mb-12">
                 <FaFeatherAlt
                     className="text-3xl"
                     onClick={() => setIsOpen(!isOpen)}
@@ -83,9 +84,8 @@ function CrearTweet(props) {
                         />
 
                         <label className="mb-3 text-lg w-full">Tweet</label>
-                        <input
+                        <textarea
                             className="mb-3 text-lg rounded-md p-1 text-azulOscuro2 font-semibold h-[30vh] w-full"
-                            type="text"
                             value={tweet}
                             onChange={(e) => setTweet(e.target.value)}
                         />
