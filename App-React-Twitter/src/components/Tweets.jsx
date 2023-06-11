@@ -12,7 +12,8 @@ function Tweets(){
 
     const getTweets = async() => {
         const dataExistente= await localStorage.getItem('tweets')
-        setTweets(JSON.parse(dataExistente))
+        let parseados=JSON.parse(dataExistente)
+        setTweets(parseados.reverse())
     };
 
 
