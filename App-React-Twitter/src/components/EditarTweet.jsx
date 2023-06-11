@@ -64,16 +64,9 @@ function EditarTweet({ data, actualizarTweets }) {
                                 }}
                             />
                         </div>
-                        <label className="mb-3 text-lg w-full">
-                            Nombre de Usuario
-                        </label>
-                        <input
-                            className="mb-3 text-lg rounded-md p-1 text-azulOscuro2 font-semibold w-full"
-                            type="text"
-                        />
-
+                    
                         <label className="mb-3 text-lg w-full">Tweet</label>
-                        <input
+                        <textarea
                             className="mb-3 text-lg rounded-md p-1 text-azulOscuro2 font-semibold h-[30vh] w-full"
                             type="text"
                             value={tweet}
