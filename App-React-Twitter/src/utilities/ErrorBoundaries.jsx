@@ -13,7 +13,7 @@ class ErrorBoundary extends React.Component {
     render() {
         const { children, fallback } = this.props;
         if (this.state.hasError) {
-            return <div className="p-6 bg-red-500 text-white">{fallback};</div>;
+            return <div className="p-6 bg-red-500 text-white font-Quicksand">{fallback}</div>;
         }
         return children;
     }
