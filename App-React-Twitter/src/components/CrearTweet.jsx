@@ -59,33 +59,33 @@ function CrearTweet(props) {
   };
   return (
     <div>
-      <div className="bg-white text-azulOscuro1 p-4 rounded-[80%] w-[16%] cursor-pointer fixed bottom-5 right-5 z-20 flex justify-center sm:w-[10%] md:">
-        <FaFeatherAlt className="text-3xl" onClick={() => setIsOpen(!isOpen)} />
+      <div className="bg-white text-azulOscuro1 p-4 rounded-[80%] w-[16%] cursor-pointer fixed bottom-5 right-5 z-20 flex justify-center sm:w-[10%] lg:w-[8%] xl:w-[6%] ">
+        <FaFeatherAlt className="text-3xl 2xl:text-4xl ur:text-5xl" onClick={() => setIsOpen(!isOpen)} />
       </div>
 
       {isOpen && (
         <form
-          className="fixed flex justify-center items-center inset-0 backdrop-blur-sm bg-black bg-opacity-30 md:mb-14"
+          className="fixed flex justify-center items-center inset-0 backdrop-blur-sm bg-black bg-opacity-40 "
           onSubmit={handleSubmit}
         >
-          <div className="bg-azulOscuro2 text-white flex flex-col justify-start items-center  font-Quicksand p-5 w-[90%] rounded-xl sm:w-[70%]">
+          <div className="bg-azulOscuro2 text-white flex flex-col justify-start items-center  font-Quicksand p-5 w-[90%] rounded-xl sm:w-[70%] lg:w-[40%] ur:w-[30%]">
             <div className="flex justify-end w-full ">
               <FaWindowClose
                 className=" text-2xl cursor-pointer lg:text-3xl"
                 onClick={() => setIsOpen(false)}
               />
             </div>
-            <label className="mb-3 text-lg w-full sm:text-xl">Nombre de Usuario</label>
+            <label className="mb-3 text-lg w-full sm:text-xl 2xl:text-2xl">Nombre de Usuario</label>
             <input
-              className="mb-3 text-lg rounded-md p-1 text-azulOscuro2 font-semibold w-full"
+              className="mb-3 text-lg rounded-md p-1 text-azulOscuro2 font-semibold w-full ur:text-2xl ur:p-2"
               type="text"
               value={usuario}
               onChange={(e) => setUsuario(e.target.value)}
             />
 
-            <label className="mb-3 text-lg w-full sm:text-xl">Tweet</label>
+            <label className="mb-3 text-lg w-full sm:text-xl 2xl:text-2xl">Tweet</label>
             <textarea
-              className="mb-3 text-lg rounded-md p-1 text-azulOscuro2 font-semibold h-[30vh] w-full"
+              className="mb-3 text-lg rounded-md p-1 text-azulOscuro2 font-semibold h-[30vh] w-full lg:h-[40vh] ur:text-2xl"
               value={tweet}
               onChange={(e) => {
                 setTweet(e.target.value);
@@ -93,7 +93,7 @@ function CrearTweet(props) {
                 setLimiteCaracteres(e.target.value.length > 350);
               }}
             />
-            <p>{contadorCaracteres}/350 caracteres</p>
+            <p className="ur:text-xl">{contadorCaracteres}/350 caracteres</p>
             {excedeLimite && (
               <p className="font-bold text-red-500">
                 Excede el límite de caracteres
@@ -103,7 +103,7 @@ function CrearTweet(props) {
               type="submit"
               className={`bg-${
                 excedeLimite ? "azulOscuro1" : "azulGris"
-              } w-[40%] text-xl p-2 rounded-lg mt-4`}
+              } w-[40%] text-xl p-2 rounded-lg mt-4 2xl:text-2xl`}
               disabled={excedeLimite}
             >
               Publicar

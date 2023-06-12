@@ -19,15 +19,13 @@ function App() {
     setTweets(parseados.reverse());
   };
   return (
-    <div className="bg-azulGris min-h-screen ">
+    <div className="bg-azulGris min-h-screen flex-grow">
       <Toaster position="top-center" />
-    <div className="flex flex-col flex-grow">
-    <Header />
+      <Header />
       <ErrorBoundary fallback={"Algo salió mal. Inténtalo de nuevo más tarde"}>
         <Tweets tweets={tweets} actualizarTweets={getTweets} />
         <CrearTweet actualizarTweets={getTweets} />
       </ErrorBoundary>
-    </div>
       <Footer />
     </div>
   );

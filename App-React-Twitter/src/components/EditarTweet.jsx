@@ -56,15 +56,15 @@ function EditarTweet({ data, actualizarTweets }) {
   return (
     <div>
       <div className="cursor-pointer ">
-        <FaPencilAlt className="" onClick={() => setIsOpen(!isOpen)} />
+        <FaPencilAlt className="ur:text-3xl" onClick={() => setIsOpen(!isOpen)} />
       </div>
 
       {isOpen && (
         <form
-          className="fixed flex justify-center  items-center inset-0 backdrop-blur-sm  bg-black bg-opacity-30 md:mb-14"
+          className="fixed flex justify-center  items-center inset-0 backdrop-blur-sm  bg-black bg-opacity-40  "
           onSubmit={handleSubmit}
         >
-          <div className="bg-azulOscuro2 text-white flex flex-col justify-start items-center  font-Quicksand p-5 w-[90%] rounded-xl sm:w-[70%] md:w-[60%] ">
+          <div className="bg-azulOscuro2 text-white flex flex-col justify-start items-center font-Quicksand p-5 w-[90%] rounded-xl sm:w-[70%] md:w-[60%] lg:w-[40%] ur:w-[30%]">
             <div className="flex justify-end w-full ">
               <FaWindowClose
                 className=" text-2xl cursor-pointer lg:text-3xl"
@@ -75,9 +75,9 @@ function EditarTweet({ data, actualizarTweets }) {
               />
             </div>
 
-            <label className="mb-3 text-lg w-full sm:text-2xl">Tweet</label>
+            <label className="mb-3 text-lg w-full sm:text-2xl 2xl:text-3xl">Tweet</label>
             <textarea
-              className="mb-3 text-lg rounded-md p-1 text-azulOscuro2 font-semibold h-[30vh] w-full sm:text-xl"
+              className="mb-3 text-lg rounded-md p-1 text-azulOscuro2 font-semibold h-[30vh] w-full sm:text-xl lg:h-[45vh] ur:text-2xl"
               type="text"
               value={tweet}
               onChange={(e) => {
@@ -86,7 +86,7 @@ function EditarTweet({ data, actualizarTweets }) {
                 setLimiteCaracteres(e.target.value.length > 350);
               }}
             />
-            <p>{contadorCaracteres}/350 caracteres</p>
+            <p className="ur:text-2xl">{contadorCaracteres}/350 caracteres</p>
             {excedeLimite && (
               <p className="font-bold text-red-500">
                 Excede el límite de caracteres
@@ -95,7 +95,7 @@ function EditarTweet({ data, actualizarTweets }) {
             <button
               className={`bg-${
                 excedeLimite ? "azulOscuro1" : "azulGris"
-              } w-[40%] text-xl p-2 rounded-lg mt-4`}
+              } w-[40%] text-xl p-2 rounded-lg mt-4 2xl:text-2xl 2xl:w-[30%] `}
               disabled={excedeLimite}
             >
               Editar
