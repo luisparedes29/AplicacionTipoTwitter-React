@@ -1,30 +1,25 @@
-import { useState } from 'react';
-import { FaFeatherAlt, FaWindowClose } from 'react-icons/fa';
-import { v4 as uuidv4 } from 'uuid';
+import { useState } from "react";
+import { FaFeatherAlt, FaWindowClose } from "react-icons/fa";
+import { v4 as uuidv4 } from "uuid";
 
 function CrearTweet(props) {
     const [isOpen, setIsOpen] = useState(false);
-    const [usuario, setUsuario] = useState('');
-    const [tweet, setTweet] = useState('');
+    const [usuario, setUsuario] = useState("");
+    const [tweet, setTweet] = useState("");
+    const [contadorCaracteres, setContadorCaracteres] = useState(0);
+    const [excedeLimite, setLimiteCaracteres] = useState(false);
     const handleSubmit = (e) => {
         e.preventDefault();
         //Validacion de los campos del formulario
         if (!usuario || !tweet) {
-            console.log('Datos incompletos, rellena todos los campos');
+            console.log("Datos incompletos, rellena todos los campos");
             return;
         }
 
         // Obtener la fecha y hora actual en formato de 24 horas
         const now = new Date();
-        const fechaCreacion = `${now.getDate().toString().padStart(2, '0')}-${(
-            now.getMonth() + 1
-        )
-            .toString()
-            .padStart(2, '0')}-${now.getFullYear()}`;
-        const horaCreacion = `${now
-            .getHours()
-            .toString()
-            .padStart(2, '0')}:${now.getMinutes().toString().padStart(2, '0')}`;
+        const fechaCreacion = `${now.getDate().toString().padStart(2, "0")}-${(now.getMonth() + 1).toString().padStart(2, "0")}-${now.getFullYear()}`;
+        const horaCreacion = `${now.getHours().toString().padStart(2, "0")}:${now.getMinutes().toString().padStart(2, "0")}`;
 
         let nuevaData = {
             id: uuidv4(),
@@ -36,18 +31,18 @@ function CrearTweet(props) {
         };
 
         //Obtenemos los datos existentes del localstorage
-        const dataExistente = localStorage.getItem('tweets');
+        const dataExistente = localStorage.getItem("tweets");
 
         if (!dataExistente) {
-            localStorage.setItem('tweets', JSON.stringify([nuevaData]));
+            localStorage.setItem("tweets", JSON.stringify([nuevaData]));
         } else {
             const tweets = JSON.parse(dataExistente);
             tweets.push(nuevaData);
-            localStorage.setItem('tweets', JSON.stringify(tweets));
+            localStorage.setItem("tweets", JSON.stringify(tweets));
         }
 
-        setUsuario('');
-        setTweet('');
+        setUsuario("");
+        setTweet("");
 
         props.actualizarTweets();
         setIsOpen(false);
@@ -55,45 +50,31 @@ function CrearTweet(props) {
     return (
         <div>
             <div className="bg-white text-azulOscuro1  p-4 rounded-[80%] w-[16%] cursor-pointer fixed bottom-5 right-5 mb-12">
-                <FaFeatherAlt
-                    className="text-3xl"
-                    onClick={() => setIsOpen(!isOpen)}
-                />
+                <FaFeatherAlt className="text-3xl" onClick={() => setIsOpen(!isOpen)} />
             </div>
 
             {isOpen && (
-                <form
-                    className="fixed flex justify-center items-center inset-0 backdrop-blur-sm  bg-black bg-opacity-30"
-                    onSubmit={handleSubmit}
-                >
+                <form className="fixed flex justify-center items-center inset-0 backdrop-blur-sm  bg-black bg-opacity-30" onSubmit={handleSubmit}>
                     <div className="bg-azulOscuro2 text-white flex flex-col justify-start items-center  font-Quicksand p-5 w-[90%] rounded-xl">
                         <div className="flex justify-end w-full ">
-                            <FaWindowClose
-                                className=" text-2xl cursor-pointer lg:text-3xl"
-                                onClick={() => setIsOpen(false)}
-                            />
+                            <FaWindowClose className=" text-2xl cursor-pointer lg:text-3xl" onClick={() => setIsOpen(false)} />
                         </div>
-                        <label className="mb-3 text-lg w-full">
-                            Nombre de Usuario
-                        </label>
-                        <input
-                            className="mb-3 text-lg rounded-md p-1 text-azulOscuro2 font-semibold w-full"
-                            type="text"
-                            value={usuario}
-                            onChange={(e) => setUsuario(e.target.value)}
-                        />
+                        <label className="mb-3 text-lg w-full">Nombre de Usuario</label>
+                        <input className="mb-3 text-lg rounded-md p-1 text-azulOscuro2 font-semibold w-full" type="text" value={usuario} onChange={(e) => setUsuario(e.target.value)} />
 
                         <label className="mb-3 text-lg w-full">Tweet</label>
                         <textarea
                             className="mb-3 text-lg rounded-md p-1 text-azulOscuro2 font-semibold h-[30vh] w-full"
                             value={tweet}
-                            onChange={(e) => setTweet(e.target.value)}
+                            onChange={(e) => {
+                                setTweet(e.target.value);
+                                setContadorCaracteres(e.target.value.length);
+                                setLimiteCaracteres(e.target.value.length > 350);
+                            }}
                         />
-
-                        <button
-                            type="submit"
-                            className="bg-azulGris w-[40%] text-xl p-2   rounded-lg mt-4"
-                        >
+                        <p>{contadorCaracteres}/350 caracteres</p>
+                        {excedeLimite && <p className="font-bold text-red-500">Excede el límite de caracteres</p>}
+                        <button type="submit" className={`bg-${excedeLimite ? "azulOscuro1" : "azulGris"} w-[40%] text-xl p-2 rounded-lg mt-4`} disabled={excedeLimite}>
                             Publicar
                         </button>
                     </div>

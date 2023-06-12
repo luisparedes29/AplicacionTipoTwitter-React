@@ -76,7 +76,7 @@ function CardTweet({ data, actualizarTweets }) {
             <div className="fixed flex justify-center items-center inset-0 backdrop-blur-sm  bg-black bg-opacity-30">
               <div className="bg-azulOscuro2 text-white flex flex-col justify-start items-center  font-Quicksand p-5 w-[90%] rounded-xl">
                 <p className="text-center mb-5">
-                  Esta segur@ de eliminar este tweet?
+                  ¿Estás segur@ de querer eliminar este tweet?
                 </p>
                 <div className="flex mb-4">
                   <button
@@ -85,7 +85,7 @@ function CardTweet({ data, actualizarTweets }) {
                       setIsOpen(false);
                     }}
                   >
-                    Volver Atras
+                    Volver Atrás
                   </button>
                   <button
                     className="bg-azulGris p-2 rounded-md text-base mr-3"
