@@ -1,6 +1,7 @@
 import { FaHeart, FaTrash } from "react-icons/fa";
 import EditarTweet from "./EditarTweet";
 import { useState } from "react";
+import { Toaster, toast } from "react-hot-toast";
 
 function CardTweet({ data, actualizarTweets }) {
   const [eliminarTweet, setEliminarTweet] = useState(null);
@@ -47,14 +48,15 @@ function CardTweet({ data, actualizarTweets }) {
     tweets.splice(tweetAEditar, 1);
     localStorage.setItem("tweets", JSON.stringify(tweets));
     actualizarTweets();
+    toast.success("Se ha eliminado correctamente tu tweet");
   };
   return (
     <div>
-      <section className="text-lg text-left p-4 border-b-2 border-white font-Quicksand h-auto">
-        <h1 className="border-b-2 pb-2 font-bold text-xl">{data.usuario}</h1>
-        <p className="break-words mt-2">{data.tweet}</p>
+      <section className="text-lg text-left p-4 border-b-2 border-white font-Quicksand h-auto w-full">
+        <h1 className="border-b-2 pb-2 font-bold text-xl w-full">{data.usuario}</h1>
+        <p className="break-words mt-2 w-full">{data.tweet}</p>
 
-        <div className="flex items-center mt-3">
+        <div className="flex items-center mt-3 w-full">
           <p className="text-sm text-gris mr-2 ">{data.fechaCreacion}</p>
           <p className="mr-2 text-gris">·</p>
           <p className="text-sm text-gris">{data.horaCreacion}</p>
@@ -74,7 +76,7 @@ function CardTweet({ data, actualizarTweets }) {
 
           {isOpen && (
             <div className="fixed flex justify-center items-center inset-0 backdrop-blur-sm  bg-black bg-opacity-30">
-              <div className="bg-azulOscuro2 text-white flex flex-col justify-start items-center  font-Quicksand p-5 w-[90%] rounded-xl">
+              <div className="bg-azulOscuro2 text-white flex flex-col justify-start items-center  font-Quicksand p-5 w-[90%] rounded-xl sm:w-[70%] md:w-[60%]">
                 <p className="text-center mb-5">
                   ¿Estás segur@ de querer eliminar este tweet?
                 </p>
