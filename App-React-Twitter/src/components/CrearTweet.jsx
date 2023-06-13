@@ -4,7 +4,7 @@ import { v4 as uuidv4 } from "uuid";
 import { Toaster, toast } from "react-hot-toast";
 
 import { useMutation } from "@apollo/client";
-import { CREATE_TWEET } from "../graphql/tweets";
+import { CREATE_TWEET, GET_TWEETS } from "../graphql/tweets";
 
 function CrearTweet(props) {
   const [isOpen, setIsOpen] = useState(false);
@@ -13,7 +13,13 @@ function CrearTweet(props) {
   const [contadorCaracteres, setContadorCaracteres] = useState(0);
   const [excedeLimite, setLimiteCaracteres] = useState(false);
 
-  const [createTweet,{loading,error}]= useMutation(CREATE_TWEET)
+  const [createTweet,{loading,error}]= useMutation(CREATE_TWEET,{
+    refetchQueries:[
+      {
+        query: GET_TWEETS
+      }
+    ]
+  })
 
 
   const handleSubmit = (e) => {
