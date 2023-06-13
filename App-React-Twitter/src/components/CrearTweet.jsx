@@ -3,14 +3,22 @@ import { FaFeatherAlt, FaWindowClose } from "react-icons/fa";
 import { v4 as uuidv4 } from "uuid";
 import { Toaster, toast } from "react-hot-toast";
 
+import { useMutation } from "@apollo/client";
+import { CREATE_TWEET } from "../graphql/tweets";
+
 function CrearTweet(props) {
   const [isOpen, setIsOpen] = useState(false);
   const [usuario, setUsuario] = useState("");
   const [tweet, setTweet] = useState("");
   const [contadorCaracteres, setContadorCaracteres] = useState(0);
   const [excedeLimite, setLimiteCaracteres] = useState(false);
+
+  const [createTweet,{loading,error}]= useMutation(CREATE_TWEET)
+
+
   const handleSubmit = (e) => {
     e.preventDefault();
+
 
     //Validacion de los campos del formulario
     if (!usuario || !tweet) {
@@ -20,40 +28,47 @@ function CrearTweet(props) {
 
     // Obtener la fecha y hora actual en formato de 24 horas
     const now = new Date();
-    const fechaCreacion = `${now.getDate().toString().padStart(2, "0")}-${(
+    const fecha = `${now.getDate().toString().padStart(2, "0")}-${(
       now.getMonth() + 1
     )
       .toString()
       .padStart(2, "0")}-${now.getFullYear()}`;
-    const horaCreacion = `${now.getHours().toString().padStart(2, "0")}:${now
+    const hora = `${now.getHours().toString().padStart(2, "0")}:${now
       .getMinutes()
       .toString()
       .padStart(2, "0")}`;
 
     let nuevaData = {
-      id: uuidv4(),
       usuario,
       tweet,
       favorito: false,
-      fechaCreacion,
-      horaCreacion,
+      fecha,
+      hora,
     };
+    createTweet({
+      variables:{
+        user: usuario,
+        tweet: tweet,
+        fecha: fecha,
+        hora: hora
+      }
+    })
 
     //Obtenemos los datos existentes del localstorage
-    const dataExistente = localStorage.getItem("tweets");
+    // const dataExistente = localStorage.getItem("tweets");
 
-    if (!dataExistente) {
-      localStorage.setItem("tweets", JSON.stringify([nuevaData]));
-    } else {
-      const tweets = JSON.parse(dataExistente);
-      tweets.push(nuevaData);
-      localStorage.setItem("tweets", JSON.stringify(tweets));
-    }
+    // if (!dataExistente) {
+    //   localStorage.setItem("tweets", JSON.stringify([nuevaData]));
+    // } else {
+    //   const tweets = JSON.parse(dataExistente);
+    //   tweets.push(nuevaData);
+    //   localStorage.setItem("tweets", JSON.stringify(tweets));
+    // }
 
     setUsuario("");
     setTweet("");
 
-    props.actualizarTweets();
+   // props.actualizarTweets();
     toast.success("Se ha publicado correctamente tu tweet!");
     setIsOpen(false);
   };

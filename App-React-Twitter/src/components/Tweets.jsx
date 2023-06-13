@@ -1,25 +1,29 @@
 import CardTweet from "./CardTweet";
 import React, { useState } from "react";
-import {useQuery} from '@apollo/client'
+
 
 function Tweets(props) {
 
-  useQuery
-  // const [render, setRender] = useState(true);
 
-  // let result;
+  const [render, setRender] = useState(true);
 
-  // if (render) {
-  //   //Si el boton de tweets esta presionado el estado es true, aunque es true por defecto;
-  //   result = props.tweets;
-  // } else {
-  //   //Si el boton de favoritos es presionado, coloca el estado render en false y renderiza solo los tweets con el valor de favorite en true
-  //   result = props.tweets.filter((data) => {
-  //     if (data.favorito) {
-  //       return data;
-  //     }
-  //   });
-  // }
+  let result;
+  let reverse
+
+  if (render) {
+    //Si el boton de tweets esta presionado el estado es true, aunque es true por defecto;
+    result = props.tweets;
+    reverse=result.slice().reverse()
+    console.log(result)
+    console.log(props.tweets)
+  } else {
+    //Si el boton de favoritos es presionado, coloca el estado render en false y renderiza solo los tweets con el valor de favorite en true
+    reverse = props.tweets.filter((data) => {
+      if (data.favorite) {
+        return data;
+      }
+    });
+  }
 
   return (
     <div className="w-full mb-10 min-h-[100vh]">
@@ -41,12 +45,11 @@ function Tweets(props) {
         <h1 className="m-5 font-bold">Tweets</h1>
 
         <section className="bg-azulOscuro2 rounded-t-lg w-full h-full sm:w-[60%] lg:w-[50%] 2xl:w-[45%]">
-          {result &&
-            result.map((data) => (
+          {reverse &&
+            reverse.map((data) => (
               <CardTweet
                 key={data.id}
                 data={data}
-                actualizarTweets={props.actualizarTweets}
               />
             ))}
         </section>

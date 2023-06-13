@@ -6,7 +6,7 @@ import { Toaster, toast } from "react-hot-toast";
 function CardTweet({ data, actualizarTweets }) {
   const [eliminarTweet, setEliminarTweet] = useState(null);
   const [isOpen, setIsOpen] = useState(false);
-  const [favorito, setFavorito] = useState(data.favorito);
+  // const [favorito, setFavorito] = useState(data.favorito);
 
   const handleDeleteClick = (tweet) => {
     setEliminarTweet(tweet);
@@ -14,8 +14,8 @@ function CardTweet({ data, actualizarTweets }) {
   };
 
   const handleFavClick = () => {
-    setFavorito(!favorito);
-    data.favorito = !favorito;
+    // setFavorito(!favorito);
+    data.favorite = !favorito;
 
     const dataExistente = localStorage.getItem("tweets");
     if (!dataExistente) {
@@ -28,7 +28,7 @@ function CardTweet({ data, actualizarTweets }) {
       console.log("No se encontró el tweet en localStorage");
       return;
     }
-    tweets[tweetIndex].favorito = data.favorito;
+    tweets[tweetIndex].favorito = data.favorite;
     localStorage.setItem("tweets", JSON.stringify(tweets));
   };
 
@@ -53,19 +53,19 @@ function CardTweet({ data, actualizarTweets }) {
   return (
     <div>
       <section className="text-lg text-left p-4 border-b-2 border-white font-Quicksand h-auto w-full ur:text-2xl">
-        <h1 className="border-b-2 pb-2 font-bold text-xl w-full ur:text-2xl ">{data.usuario}</h1>
+        <h1 className="border-b-2 pb-2 font-bold text-xl w-full ur:text-2xl ">{data.user}</h1>
         <p className="break-words mt-2 w-full">{data.tweet}</p>
 
         <div className="flex items-center mt-3 w-full">
-          <p className="text-sm text-gris mr-2 ur:text-xl">{data.fechaCreacion}</p>
+          <p className="text-sm text-gris mr-2 ur:text-xl">{data.fecha}</p>
           <p className="mr-2 text-gris ur:text-xl">·</p>
-          <p className="text-sm text-gris ur:text-xl">{data.horaCreacion}</p>
+          <p className="text-sm text-gris ur:text-xl">{data.hora}</p>
         </div>
 
         <div className="flex justify-end w-full">
           <FaHeart
             className={`mr-2 cursor-pointer ur:text-3xl ${
-              favorito ? "text-[#6D6CBC]" : ""
+              data.favorite ? "text-[#6D6CBC]" : ""
             }`}
             onClick={handleFavClick}
           />
