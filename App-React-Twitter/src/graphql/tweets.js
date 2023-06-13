@@ -12,3 +12,16 @@ export const GET_TWEETS = gql`
         }
 }
 `;
+
+export const CREATE_TWEET = gql`
+mutation($user:String, $tweet:String, $fecha:String,$hora:String){
+  addTweet(user:$user,tweet: $tweet, favorite:false, fecha:$fecha, hora: $hora) {
+    id
+    user
+    tweet
+    fecha
+    hora
+    favorite
+  }
+}
+`;

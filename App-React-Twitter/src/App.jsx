@@ -1,34 +1,43 @@
-import Header from "./components/Header";
-import Tweets from "./components/Tweets";
-import Footer from "./components/Footer";
-import ErrorBoundary from "./utilities/ErrorBoundaries";
-import CrearTweet from "./components/CrearTweet";
-import React, { useState, useEffect } from "react";
-import { Toaster } from "react-hot-toast";
+import Header from './components/Header';
+import Tweets from './components/Tweets';
+import Footer from './components/Footer';
+import ErrorBoundary from './utilities/ErrorBoundaries';
+import CrearTweet from './components/CrearTweet';
+import React, { useState, useEffect } from 'react';
+import { Toaster } from 'react-hot-toast';
+import { useQuery } from '@apollo/client';
+import { GET_TWEETS } from './graphql/tweets';
 
 function App() {
-  const [tweets, setTweets] = useState(null);
+    //   const [tweets, setTweets] = useState(null);
 
-  useEffect(() => {
-    getTweets();
-  }, []);
+    const { loading, error, data } = useQuery(GET_TWEETS);
+    // console.log(loading, error, data);
+    console.log(loading,error,data)
 
-  const getTweets = async () => {
-    const dataExistente = await localStorage.getItem("tweets");
-    let parseados = JSON.parse(dataExistente);
-    setTweets(parseados.reverse());
-  };
-  return (
-    <div className="bg-azulGris min-h-screen flex-grow">
-      <Toaster position="top-center" />
-      <Header />
-      <ErrorBoundary fallback={"Algo salió mal. Inténtalo de nuevo más tarde"}>
-        <Tweets tweets={tweets} actualizarTweets={getTweets} />
-        <CrearTweet actualizarTweets={getTweets} />
-      </ErrorBoundary>
-      <Footer />
-    </div>
-  );
+    //   console.log(data.tweets)
+
+    if (loading) return <p>loading</p>;
+    if (error) return <p>Error</p>;
+    if (!data) return <p>no data</p>;
+
+    //   useEffect(() => {
+    //     getTweets();
+    //   }, []);
+
+    return (
+        <div className="bg-azulGris min-h-screen flex-grow">
+            <Toaster position="top-center" />
+            <Header />
+            <ErrorBoundary
+                fallback={'Algo salió mal. Inténtalo de nuevo más tarde'}
+            >
+                <Tweets tweets={data.tweets} />
+                <CrearTweet />
+            </ErrorBoundary>
+            <Footer />
+        </div>
+    );
 }
 
 export default App;
