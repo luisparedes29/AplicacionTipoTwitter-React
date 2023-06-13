@@ -1,22 +1,25 @@
 import CardTweet from "./CardTweet";
 import React, { useState } from "react";
+import {useQuery} from '@apollo/client'
 
 function Tweets(props) {
-  const [render, setRender] = useState(true);
 
-  let result;
+  useQuery
+  // const [render, setRender] = useState(true);
 
-  if (render) {
-    //Si el boton de tweets esta presionado el estado es true, aunque es true por defecto;
-    result = props.tweets;
-  } else {
-    //Si el boton de favoritos es presionado, coloca el estado render en false y renderiza solo los tweets con el valor de favorite en true
-    result = props.tweets.filter((data) => {
-      if (data.favorito) {
-        return data;
-      }
-    });
-  }
+  // let result;
+
+  // if (render) {
+  //   //Si el boton de tweets esta presionado el estado es true, aunque es true por defecto;
+  //   result = props.tweets;
+  // } else {
+  //   //Si el boton de favoritos es presionado, coloca el estado render en false y renderiza solo los tweets con el valor de favorite en true
+  //   result = props.tweets.filter((data) => {
+  //     if (data.favorito) {
+  //       return data;
+  //     }
+  //   });
+  // }
 
   return (
     <div className="w-full mb-10 min-h-[100vh]">
