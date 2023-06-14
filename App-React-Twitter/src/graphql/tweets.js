@@ -25,3 +25,19 @@ mutation($user:String, $tweet:String, $fecha:String,$hora:String){
   }
 }
 `;
+
+export const UPDATE_TWEET = gql`
+mutation($id: ID!, $tweet: String!) {
+  updateTweet(id: $id, tweet: $tweet) {
+    tweet
+  }
+}
+`;
+
+export const DELETE_TWEET = gql`
+mutation ($deleteTweetId: ID) {
+  deleteTweet(id: $deleteTweetId) {
+    id
+  }
+}
+`;
