@@ -1,11 +1,14 @@
 import { FaHeart, FaTrash } from "react-icons/fa";
 import EditarTweet from "./EditarTweet";
 import { useState } from "react";
+import { Toaster, toast } from "react-hot-toast";
 import { useMutation } from "@apollo/client";
-import { DELETE_TWEET, GET_TWEETS } from "../graphql/tweets";
+import { DELETE_TWEET, GET_TWEETS, UPDATE_FAVORITES } from "../graphql/tweets";
 
 function CardTweet({ data, actualizarTweets }) {
     const [isOpen, setIsOpen] = useState(false);
+    const [favorite, setFavorite] = useState(false)
+    
     const [deleteTweet, { loading, error }] = useMutation(DELETE_TWEET, {
         refetchQueries: [
             {
@@ -17,6 +20,30 @@ function CardTweet({ data, actualizarTweets }) {
     const handleDeleteClick = () => {
         setIsOpen(true);
     };
+
+    const [updateFavorites, { loading: updateFavoritesLoading, error: updateFavoritesError }] = useMutation(UPDATE_FAVORITES, {
+      refetchQueries: [
+          {
+              query: GET_TWEETS,
+          },
+      ],
+  });
+
+    const favoriteUpdate = async () => {
+      try {
+          await updateFavorites({
+              variables: {
+                  updateFavoritesId: data.id,
+                  favorite: favorite,
+                },
+          });
+          console.log(favoriteUpdate)
+           
+      } catch (error) {
+          // Manejo de errores
+          console.log(error);
+      }
+  };
 
     return (
         <div>
@@ -31,7 +58,11 @@ function CardTweet({ data, actualizarTweets }) {
                 </div>
 
                 <div className="flex justify-end w-full">
-                    <FaHeart className={`mr-2 cursor-pointer ur:text-3xl ${data.favorite ? "text-[#6D6CBC]" : ""}`} />
+                    <FaHeart 
+                    className={`mr-2 cursor-pointer ur:text-3xl ${data.favorite ? "text-[#6D6CBC]" : ""}`} 
+                    onClick={() => {
+                      setFavorite(!favorite);
+                      favoriteUpdate()}}/>
                     <FaTrash className="cursor-pointer mr-2 ur:text-3xl" onClick={() => handleDeleteClick(data.id)} />
 
                     {isOpen && (
@@ -56,6 +87,7 @@ function CardTweet({ data, actualizarTweets }) {
                                                     deleteTweetId: data.id,
                                                 },
                                             });
+                                            toast.success('Se ha eliminado correctamente')
                                         }}
                                     >
                                         Eliminar

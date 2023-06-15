@@ -41,3 +41,12 @@ mutation ($deleteTweetId: ID) {
   }
 }
 `;
+
+export const UPDATE_FAVORITES = gql`
+mutation ($updateFavoritesId: ID, $favorite: Boolean) {
+  updateFavorites(id: $updateFavoritesId, favorite: $favorite) {
+    id
+    favorite
+  }
+}
+`;
