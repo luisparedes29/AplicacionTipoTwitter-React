@@ -9,21 +9,15 @@ import { useQuery } from '@apollo/client';
 import { GET_TWEETS } from './graphql/tweets';
 
 function App() {
-    //   const [tweets, setTweets] = useState(null);
 
     const { loading, error, data } = useQuery(GET_TWEETS);
-    // console.log(loading, error, data);
     console.log(loading,error,data)
 
-    //   console.log(data.tweets)
 
     if (loading) return <p>loading</p>;
     if (error) return <p>Error</p>;
     if (!data) return <p>no data</p>;
 
-    //   useEffect(() => {
-    //     getTweets();
-    //   }, []);
 
     return (
         <div className="bg-azulGris min-h-screen flex-grow">

@@ -1,6 +1,6 @@
 import { FaHeart, FaTrash } from "react-icons/fa";
 import EditarTweet from "./EditarTweet";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Toaster, toast } from "react-hot-toast";
 import { useMutation } from "@apollo/client";
 import { DELETE_TWEET, GET_TWEETS, UPDATE_FAVORITES } from "../graphql/tweets";
@@ -37,13 +37,16 @@ function CardTweet({ data, actualizarTweets }) {
                   favorite: favorite,
                 },
           });
-          console.log(favoriteUpdate)
            
       } catch (error) {
           // Manejo de errores
           console.log(error);
       }
   };
+
+    useEffect(() => {
+        favoriteUpdate();
+    }, [favorite]);
 
     return (
         <div>
@@ -81,7 +84,6 @@ function CardTweet({ data, actualizarTweets }) {
                                     <button
                                         className="bg-azulGris p-2 rounded-md text-base mr-3 2xl:text-xl ur:text-2xl"
                                         onClick={() => {
-                                            console.log(data.id);
                                             deleteTweet({
                                                 variables: {
                                                     deleteTweetId: data.id,

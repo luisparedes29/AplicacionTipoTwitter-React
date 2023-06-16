@@ -59,18 +59,7 @@ function CrearTweet(props) {
         hora: hora
       }
     })
-
-    //Obtenemos los datos existentes del localstorage
-    // const dataExistente = localStorage.getItem("tweets");
-
-    // if (!dataExistente) {
-    //   localStorage.setItem("tweets", JSON.stringify([nuevaData]));
-    // } else {
-    //   const tweets = JSON.parse(dataExistente);
-    //   tweets.push(nuevaData);
-    //   localStorage.setItem("tweets", JSON.stringify(tweets));
-    // }
-
+    
     setUsuario("");
     setTweet("");
 
@@ -79,9 +68,9 @@ function CrearTweet(props) {
     setIsOpen(false);
   };
   return (
-    <div>
+    <div onClick={() => setIsOpen(!isOpen)}>
       <div className="bg-white text-azulOscuro1 p-4 rounded-[80%] w-[16%] cursor-pointer fixed bottom-5 right-5 z-20 flex justify-center sm:w-[10%] lg:w-[8%] xl:w-[6%] ">
-        <FaFeatherAlt className="text-3xl 2xl:text-4xl ur:text-5xl" onClick={() => setIsOpen(!isOpen)} />
+        <FaFeatherAlt className="text-3xl 2xl:text-4xl ur:text-5xl"/>
       </div>
 
       {isOpen && (

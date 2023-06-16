@@ -14,8 +14,6 @@ function Tweets(props) {
     //Si el boton de tweets esta presionado el estado es true, aunque es true por defecto;
     result = props.tweets;
     reverse=result.slice().reverse()
-    console.log(result)
-    console.log(props.tweets)
   } else {
     //Si el boton de favoritos es presionado, coloca el estado render en false y renderiza solo los tweets con el valor de favorite en true
     reverse = props.tweets.filter((data) => {
