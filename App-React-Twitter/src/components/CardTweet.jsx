@@ -7,7 +7,7 @@ import { DELETE_TWEET, GET_TWEETS, UPDATE_FAVORITES } from "../graphql/tweets";
 
 function CardTweet({ data, actualizarTweets }) {
     const [isOpen, setIsOpen] = useState(false);
-    const [favorite, setFavorite] = useState(false)
+    const [favorite, setFavorite] = useState(data.favorite)
     
     const [deleteTweet, { loading, error }] = useMutation(DELETE_TWEET, {
         refetchQueries: [
@@ -65,7 +65,7 @@ function CardTweet({ data, actualizarTweets }) {
                     className={`mr-2 cursor-pointer ur:text-3xl ${data.favorite ? "text-[#6D6CBC]" : ""}`} 
                     onClick={() => {
                       setFavorite(!favorite);
-                      favoriteUpdate()}}/>
+                      }}/>
                     <FaTrash className="cursor-pointer mr-2 ur:text-3xl" onClick={() => handleDeleteClick(data.id)} />
 
                     {isOpen && (
@@ -82,7 +82,7 @@ function CardTweet({ data, actualizarTweets }) {
                                         Volver Atrás
                                     </button>
                                     <button
-                                        className="bg-azulGris p-2 rounded-md text-base mr-3 2xl:text-xl ur:text-2xl"
+                                        className="bg-azulGris p-2 rounded-md text-base mr-3 2xl:text-xl ur:text-2xl  pointer-events: none"
                                         onClick={() => {
                                             deleteTweet({
                                                 variables: {
