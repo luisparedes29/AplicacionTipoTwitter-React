@@ -1,8 +1,6 @@
 # Aplicacion tipo Twitter con React
 
-Esta es una aplicación tipo CRUD desarrollada utilizando React vite y CSS para manejar los estilos y diseño responsive.
-
-El objetivo principal de esta aplicación es permitir a los usuarios almacenar tweets y realizar operaciones básicas de creación, lectura, actualización y eliminación de tweets. La aplicación incluye funcionalidades adicionales como validación de campos, marcado de tweets como favoritos y persistencia de datos utilizando la API de LocalStorage del navegador.
+Este repositorio contiene el código de una aplicación CRUD desarrollada con React Vite y Tailwind para manejar los estilos y diseño responsive. La aplicación permite almacenar y gestionar tweets de usuarios.
 
 ## Características principales
 - Interfaz de usuario intuitiva y atractiva.
@@ -14,7 +12,7 @@ El objetivo principal de esta aplicación es permitir a los usuarios almacenar t
 ## Tecnologías utilizadas
 - React: Una biblioteca de JavaScript para construir interfaces de usuario interactivas.
 - Vite: Un entorno de desarrollo rápido para aplicaciones web modernas.
-- CSS: Lenguaje de hojas de estilo utilizado para el diseño y la presentación de la aplicación.
+- Tailwind: Un framework CSS utilitario para construir interfaces web..
 
 ## Instalación
 
@@ -40,7 +38,7 @@ Una vez que la aplicación esté en funcionamiento en tu navegador, podrás real
 
 ## Persistencia de datos
 
-Esta aplicación utiliza la API de LocalStorage del navegador para persistir los datos de los tweets. Esto significa que los tweets agregados permanecerán en la lista incluso si recargas la página o cierras y vuelves a abrir la aplicación en el mismo navegador. Sin embargo, ten en cuenta que si borras los datos del navegador o utilizas otro navegador, los tweets almacenados se perderán.
+Esta App utiliza una API GraphQL para persistir los datos de los tweets. Esto significa que los tweets agregados permanecerán en la lista incluso si recargas la página o cierras y vuelves a abrir la aplicación en el mismo navegador.
 
 ## Contribución
 
